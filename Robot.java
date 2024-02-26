@@ -1,13 +1,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-//import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends TimedRobot {
 
@@ -32,119 +31,128 @@ public class Robot extends TimedRobot {
   double up1 = 1;
   double up2 = 1;
   double Maju = 1;
-  Encoder encoder1 = new Encoder(0, 1);
-  Encoder encoder2 = new Encoder(2, 3);
+  double autonomo = 1;
 
   public void robotInit() {
-    encoder1.setDistancePerPulse(1. / 256.);
     leftMotor1.addFollower(leftMotor2);
     rightMotor1.addFollower(rightMotor2);
 
   }
 
   public void robotPeriodic() {
+    SmartDashboard.putNumber("Nível de Velocidade", speed1 * -10);
+
   }
 
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
     System.out.println("Auto selected: " + m_autoSelected);
+    autonomo = 1;
   }
 
   public void autonomousPeriodic() {
-    shooterMotor1.set(-1);
-    shooterMotor2.set(-1);
-    try {
-      Thread.sleep(1000);
-    } catch (Exception erro) {
+
+    if (autonomo == 1) {
+      shooterMotor1.set(-1);
+      shooterMotor2.set(-1);
+      try {
+        Thread.sleep(1000);
+      } catch (Exception erro) {
+      }
+
+      shooterMotor1.set(-1);
+      shooterMotor2.set(-1);
+      shooterMotor3.set(-1);
+      try {
+        Thread.sleep(1500);
+      } catch (Exception erro) {
+      }
+      coletorMotor1.set(1);
+      shooterMotor1.set(0);
+      shooterMotor2.set(0);
+      shooterMotor3.set(0);
+      try {
+        Thread.sleep(300);
+      } catch (Exception erro) {
+      }
+
+      coletorMotor1.set(0);
+      shooterMotor1.set(0);
+      shooterMotor2.set(0);
+      shooterMotor3.set(0);
+
+      rightMotor1.set(-0.4);
+      leftMotor1.set(0.32);
+      coletorMotor1.set(1);
+      try {
+        Thread.sleep(1500);
+      } catch (Exception erro) {
+      }
+
+      rightMotor1.set(0.0);
+      leftMotor1.set(0.0);
+      coletorMotor1.set(1);
+
+      try {
+        Thread.sleep(500);
+      } catch (Exception erro) {
+      }
+
+      rightMotor1.set(0.4);
+      leftMotor1.set(-0.32);
+      try {
+        Thread.sleep(1500);
+      } catch (Exception erro) {
+      }
+
+      rightMotor1.set(0.0);
+      leftMotor1.set(0.0);
+      coletorMotor1.set(0.0);
+      try {
+        Thread.sleep(200);
+      } catch (Exception erro) {
+      }
+
+      shooterMotor1.set(-1);
+      shooterMotor2.set(-1);
+      try {
+        Thread.sleep(1000);
+      } catch (Exception erro) {
+      }
+
+      shooterMotor1.set(-1);
+      shooterMotor2.set(-1);
+      shooterMotor3.set(-1);
+      coletorMotor1.set(1);
+      try {
+        Thread.sleep(1500);
+      } catch (Exception erro) {
+      }
+      coletorMotor1.set(0);
+      shooterMotor1.set(0);
+      shooterMotor2.set(0);
+      shooterMotor3.set(0);
+      try {
+        Thread.sleep(200);
+      } catch (Exception erro) {
+      }
+
+      rightMotor1.set(-0.4);
+      leftMotor1.set(0.32);
+      try {
+        Thread.sleep(1500);
+      } catch (Exception erro) {
+      }
+      autonomo = autonomo + 1;
+      coletorMotor1.set(0.0);
+      rightMotor1.set(0.0);
+      leftMotor1.set(0.0);
     }
 
-    shooterMotor1.set(-1);
-    shooterMotor2.set(-1);
-    shooterMotor3.set(-1);
-    try {
-      Thread.sleep(1500);
-    } catch (Exception erro) {
-    }
-
-    shooterMotor1.set(0);
-    shooterMotor2.set(0);
-    shooterMotor3.set(0);
-
-    encoder1.reset();
-    encoder2.reset();
-
-    rightMotor1.set(-0.3);
-    leftMotor1.set(0.22);
-    coletorMotor1.set(1);
-    try {
-      Thread.sleep(2000);
-    } catch (Exception erro) {
-    }
-
-    rightMotor1.set(0.0);
-    leftMotor1.set(0.0);
-    coletorMotor1.set(0.0);
-
-    try {
-      Thread.sleep(350);
-    } catch (Exception erro) {
-    }
-
-    rightMotor1.set(0.3);
-    leftMotor1.set(-0.22);
-    try {
-      Thread.sleep(2000);
-    } catch (Exception erro) {
-    }
-
-    rightMotor1.set(0.0);
-    leftMotor1.set(0.0);
-    coletorMotor1.set(0.0);
-    encoder1.reset();
-    encoder2.reset();
-    try {
-      Thread.sleep(200);
-    } catch (Exception erro) {
-    }
-
-    shooterMotor1.set(-1);
-    shooterMotor2.set(-1);
-    try {
-      Thread.sleep(1000);
-    } catch (Exception erro) {
-    }
-
-    shooterMotor1.set(-1);
-    shooterMotor2.set(-1);
-    shooterMotor3.set(-1);
-    try {
-      Thread.sleep(1500);
-    } catch (Exception erro) {
-    }
-
-    shooterMotor1.set(0);
-    shooterMotor2.set(0);
-    shooterMotor3.set(0);
-    try {
-      Thread.sleep(1500);
-    } catch (Exception erro) {
-    }
-
-    rightMotor1.set(-0.3);
-    leftMotor1.set(0.22);
-    try {
-      Thread.sleep(2000);
-    } catch (Exception erro) {
-    }
-    coletorMotor1.set(0.0);
-    rightMotor1.set(0.0);
-    leftMotor1.set(0.0);
-    encoder1.reset();
-    encoder2.reset();
-
-    try {
-      Thread.sleep(1500);
-    } catch (Exception erro) {
+    else {
+      coletorMotor1.set(0.0);
+      rightMotor1.set(0.0);
+      leftMotor1.set(0.0);
     }
 
   }
@@ -166,8 +174,8 @@ public class Robot extends TimedRobot {
     double left = -speed + turn;
     double right = -speed - turn;
 
-    leftMotor1.set(-left);
-    leftMotor2.set(-left);
+    leftMotor1.set(-left / 1.35);
+    leftMotor2.set(-left / 1.35);
     rightMotor1.set(right);
     rightMotor2.set(right);
 
@@ -253,9 +261,9 @@ public class Robot extends TimedRobot {
 
     if (joy2.getRawButton(2)) {
 
-      shooterMotor1.set(-0.4);
-      shooterMotor2.set(-0.4);
-      shooterMotor3.set(-0.4);
+      shooterMotor1.set(-0.3);
+      shooterMotor2.set(-0.3);
+      shooterMotor3.set(-0.3);
     }
 
     if (joy2.getRawButtonReleased(2)) {
@@ -277,7 +285,7 @@ public class Robot extends TimedRobot {
       shooterMotor3.set(0);
     }
 
-    if (joy2.getRawButtonPressed(7)) {
+    if (joy2.getRawButton(7)) {
 
       upMotor1.set(up1);
     }
@@ -292,7 +300,7 @@ public class Robot extends TimedRobot {
       upMotor1.set(0);
     }
 
-    if (joy2.getRawButtonPressed(8)) {
+    if (joy2.getRawButton(8)) {
 
       upMotor2.set(up2);
 
